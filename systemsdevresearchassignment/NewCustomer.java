@@ -34,6 +34,8 @@ public class NewCustomer extends javax.swing.JFrame {
 
          
         ResultSet rs = psGetCustomer.executeQuery();
+        
+        conn.close();
     }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Cannot get customer\n\nError" + e);
@@ -190,6 +192,8 @@ public class NewCustomer extends javax.swing.JFrame {
       
       pStatement.executeUpdate();
       JOptionPane.showMessageDialog(null, "Create Successful!\n\nReturning to Customer Details screen.");
+      
+      conn.close();
   }
   catch(Exception e){
       JOptionPane.showMessageDialog(null, "Cannot save customer details\n\nError" + e);
@@ -199,6 +203,8 @@ public class NewCustomer extends javax.swing.JFrame {
   CustomerDetails cd = new CustomerDetails();
   cd.setVisible(true);
   this.dispose();
+  
+ 
     }//GEN-LAST:event_btnCreateActionPerformed
 
     /**

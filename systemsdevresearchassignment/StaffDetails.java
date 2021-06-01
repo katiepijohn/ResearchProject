@@ -46,6 +46,8 @@ public class StaffDetails extends javax.swing.JFrame {
             this.txtUsername.setText(staff.get(staffDetails).getUsername());
             this.txtPassword.setText(staff.get(staffDetails).getPassword());
             this.txtRole.setText(staff.get(staffDetails).getRole());
+            
+            conn.close();
     }
     
             catch(Exception e){
@@ -270,6 +272,8 @@ public class StaffDetails extends javax.swing.JFrame {
             
             pStatement.executeUpdate();
             JOptionPane.showMessageDialog(null, "Saved successfully.");
+            
+            conn.close();
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Cannot save staff details\n\nError "+ e);
@@ -310,6 +314,8 @@ public class StaffDetails extends javax.swing.JFrame {
                 
                 pStatement.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Staff details have been deleted successfuly!");
+                
+                conn.close();
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Cannot delete staff\n\nError"+ e);

@@ -272,10 +272,14 @@ public class CustomerDetails extends javax.swing.JFrame {
             
             pStatement.executeUpdate();
             JOptionPane.showMessageDialog(null, "Saved successfully.");
+            
+            conn.close();
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Cannot save customer details\n\nError "+ e);
+           
         }
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -323,6 +327,8 @@ public class CustomerDetails extends javax.swing.JFrame {
                 
                 pStatement.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Customer details have been deleted successfuly!");
+                
+                conn.close();
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Cannot delete customer\n\nError"+ e);
@@ -331,7 +337,7 @@ public class CustomerDetails extends javax.swing.JFrame {
                     this.refreshData();
         }
         else{
-            JOptionPane.showMessageDialog(null, "Customer has been deleted!");
+            JOptionPane.showMessageDialog(null, "Customer has not been deleted!");
             
         }
     }//GEN-LAST:event_btnDeleteActionPerformed

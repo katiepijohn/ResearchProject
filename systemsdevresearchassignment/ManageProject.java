@@ -74,6 +74,8 @@ public class ManageProject extends javax.swing.JFrame {
             this.txtProjectName.setText(projects.get(currentProjects).getName());
             this.txtNotes.setText(projects.get(currentProjects).getNotes());
             this.txtTotalCost.setText(String.valueOf(projects.get(currentProjects).getTotalCost()));
+            
+            conn.close();
               
         }
         catch(Exception e){
@@ -107,7 +109,6 @@ public class ManageProject extends javax.swing.JFrame {
         btnNext = new javax.swing.JButton();
         btnLast = new javax.swing.JButton();
         btnFirst = new javax.swing.JButton();
-        btnCloseProject = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtProjectName = new javax.swing.JTextArea();
@@ -194,14 +195,6 @@ public class ManageProject extends javax.swing.JFrame {
             }
         });
 
-        btnCloseProject.setBackground(new java.awt.Color(235, 197, 246));
-        btnCloseProject.setText("Close Project");
-        btnCloseProject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseProjectActionPerformed(evt);
-            }
-        });
-
         btnSave.setBackground(new java.awt.Color(235, 197, 246));
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -230,33 +223,6 @@ public class ManageProject extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(bxProjectComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblTotalCost)
-                                    .addGap(166, 166, 166)))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblAssignedResearcher, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbxAssignedResearcher, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(lblNotes)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnDeleteNote))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblID)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnViewTasks)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,13 +240,39 @@ public class ManageProject extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(btnNext)
                             .addGap(18, 18, 18)
-                            .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(btnCloseProject)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(121, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(bxProjectComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblTotalCost)
+                                            .addGap(166, 166, 166)))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblAssignedResearcher, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbxAssignedResearcher, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(lblNotes)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnDeleteNote))
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(lblID)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,21 +303,17 @@ public class ManageProject extends javax.swing.JFrame {
                                 .addComponent(cmbxAssignedResearcher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53)
                                 .addComponent(btnViewTasks))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCloseProject)
-                            .addComponent(btnSave))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnPrevious)
-                            .addComponent(btnNext)
-                            .addComponent(btnLast)
-                            .addComponent(btnFirst))
-                        .addGap(9, 9, 9))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPrevious)
+                    .addComponent(btnNext)
+                    .addComponent(btnLast)
+                    .addComponent(btnFirst))
+                .addGap(9, 9, 9))
         );
 
         pack();
@@ -343,12 +331,14 @@ public class ManageProject extends javax.swing.JFrame {
             try{
                 Connection conn = DBConnection.Connect();
                 
-                String sqlDelete = "DELETE notes FROM tblProjects WHERE id=?";
+                String sqlDelete = "DELETE FROM tblProjects WHERE notes=?";
                 PreparedStatement pStatement = conn.prepareStatement(sqlDelete);
                 pStatement.setString(1, this.txtNotes.getText());
                 
                 pStatement.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Note has been closed successfuly!");
+                
+                conn.close();
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Cannot delete note\n\nError"+ e);
@@ -467,6 +457,8 @@ public class ManageProject extends javax.swing.JFrame {
             pStatement.executeUpdate();
             JOptionPane.showMessageDialog(null, "Save successful!");
             
+            conn.close();
+            
             
         }
         catch( Exception e){
@@ -477,48 +469,25 @@ public class ManageProject extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void btnCloseProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseProjectActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to close this project?\n\nThis cannot be undone", "Warning!", JOptionPane.YES_NO_OPTION);
-        if(reply == JOptionPane.YES_OPTION){
-            
-            //loggedInUser.getRole();
-
-            try{
-                Connection conn = DBConnection.Connect();
-    
-                String Role = "";
-                
-                String sql = "SELECT id, Username, Password, Role FROM tblUser WHERE (Username =? AND Password =?)";
-
-                if(Role.equals("Head Researcher")){
-                String sqlDelete = "DELETE FROM tblProjects WHERE id=?";
-                PreparedStatement pStatement = conn.prepareStatement(sqlDelete);
-                pStatement.setString(1, String.valueOf(projects.get(currentProjects).getId()));
-                
-                pStatement.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Project has been closed successfuly!");
-            }
-                else{
-                    JOptionPane.showMessageDialog(null, "Sorry, but you are not authorized to close this project\n\nError");
-                }
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Cannot delete project\n\nError"+ e);
-            }
-                    currentProjects =0;
-                    this.refreshData();
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Project has not been closed!");
-            
-        }
-
-    }//GEN-LAST:event_btnCloseProjectActionPerformed
-
     private void bxProjectCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bxProjectCompleteActionPerformed
         int reply = JOptionPane.showConfirmDialog(null, "Do you want to mark this project as complete?\n\nThis will be sent to the Head Researcher to confirm and close the project", "Warning!", JOptionPane.YES_NO_OPTION);
         if(reply == JOptionPane.YES_OPTION){
             try{
+                
+                Connection conn = DBConnection.Connect();
+                
+                ComboBoxItem assignedResearcher = (ComboBoxItem)assignedResearcherModel.getSelectedItem();
+                
+            String sqlInsert = "INSERT INTO tblClosedProjects (name, totalcost, notes, assignedResearcher) VALUES (?,?,?,?)";
+    
+         PreparedStatement pStatement = conn.prepareStatement(sqlInsert);
+         pStatement.setString(1, this.txtProjectName.getText());
+         pStatement.setString(2, this.txtTotalCost.getText());
+         pStatement.setString(3, this.txtNotes.getText());
+         pStatement.setString(4, String.valueOf(assignedResearcher.getId()));
+     
+      
+      pStatement.executeUpdate();
 
                 JOptionPane.showMessageDialog(null, "Project has been sent to the Head Researcher!");
             }
@@ -570,7 +539,6 @@ public class ManageProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCloseProject;
     private javax.swing.JButton btnDeleteNote;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;

@@ -30,6 +30,9 @@ public class TrailAudit extends javax.swing.JFrame {
         lblAudit = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
         lblHistory = new javax.swing.JLabel();
+        lblAssignedResearcher = new javax.swing.JLabel();
+        lblProjectsCompleted = new javax.swing.JLabel();
+        lblTasksCompleted = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(142, 90, 196));
@@ -49,20 +52,34 @@ public class TrailAudit extends javax.swing.JFrame {
         lblHistory.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
         lblHistory.setText("Activity History");
 
+        lblAssignedResearcher.setText("Assigned Researcher:");
+
+        lblProjectsCompleted.setText("Projects Completed:");
+
+        lblTasksCompleted.setText("Tasks Completed:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap(417, Short.MAX_VALUE)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblHistory)
-                            .addComponent(lblAudit))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(172, 172, 172)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblHistory)
+                                    .addComponent(lblAudit)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblProjectsCompleted)
+                                    .addComponent(lblAssignedResearcher)
+                                    .addComponent(lblTasksCompleted))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -75,7 +92,13 @@ public class TrailAudit extends javax.swing.JFrame {
                 .addComponent(lblAudit)
                 .addGap(18, 18, 18)
                 .addComponent(lblHistory)
-                .addContainerGap(351, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addComponent(lblAssignedResearcher)
+                .addGap(54, 54, 54)
+                .addComponent(lblProjectsCompleted)
+                .addGap(64, 64, 64)
+                .addComponent(lblTasksCompleted)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,7 +147,10 @@ public class TrailAudit extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
+    private javax.swing.JLabel lblAssignedResearcher;
     private javax.swing.JLabel lblAudit;
     private javax.swing.JLabel lblHistory;
+    private javax.swing.JLabel lblProjectsCompleted;
+    private javax.swing.JLabel lblTasksCompleted;
     // End of variables declaration//GEN-END:variables
 }

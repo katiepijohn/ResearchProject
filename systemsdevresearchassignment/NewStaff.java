@@ -34,6 +34,8 @@ public class NewStaff extends javax.swing.JFrame {
 
          
         ResultSet rs = psGetStaff.executeQuery();
+        
+        conn.close();
     }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Cannot get staff\n\nError" + e);
@@ -181,6 +183,8 @@ public class NewStaff extends javax.swing.JFrame {
       
       pStatement.executeUpdate();
       JOptionPane.showMessageDialog(null, "Create Successful!\n\nReturning to Staff Details screen.");
+      
+      conn.close();
   }
   catch(Exception e){
       JOptionPane.showMessageDialog(null, "Cannot save staff details\n\nError" + e);

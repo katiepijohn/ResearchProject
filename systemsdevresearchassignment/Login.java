@@ -178,6 +178,7 @@ public class Login extends javax.swing.JFrame {
                     }
 
                     }
+                
             
             else if(count>1){
                     JOptionPane.showMessageDialog(null, "Duplicate accounts found!n\nPlease contact Administrator");
@@ -187,11 +188,13 @@ public class Login extends javax.swing.JFrame {
                     }
                 
             }
+            
         
             catch (Exception e){
                 JOptionPane.showMessageDialog(null, "Error: " + e);
             }
         }
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed

@@ -7,6 +7,7 @@ package systemsdevresearchassignment;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 /**
@@ -14,9 +15,10 @@ import javax.swing.JOptionPane;
  * @author katie.pijohn
  */
 public class NewProject extends javax.swing.JFrame {
-
+    int currentProjects = 0;
+    ArrayList<Project> projects = new ArrayList<Project>();
     DefaultComboBoxModel assignedResearcherModel = new DefaultComboBoxModel();
-    DefaultComboBoxModel taskModel = new DefaultComboBoxModel();
+
     
     
     /**
@@ -28,24 +30,25 @@ public class NewProject extends javax.swing.JFrame {
     }
     public void refreshData(){
         try{
-         String sqlGetTask = "SELECT id, task FROM tblProjectTasks";
+            
+            projects.clear();
+            
+         String sqlGetProjects = "SELECT * FROM tblProjects";
          String sqlGetAssignedResearcher = "SELECT id, assignedResearcher FROM tblProjects";
          
          Connection conn = DBConnection.Connect();
          
-         PreparedStatement psGetTask = conn.prepareStatement(sqlGetTask);
+         PreparedStatement psGetProjects = conn.prepareStatement(sqlGetProjects);
          PreparedStatement psGetAssignedResearcher = conn.prepareStatement(sqlGetAssignedResearcher);
          
-         ResultSet rs = psGetTask.executeQuery();
-         
-         this.cmbTask.removeAllItems();
-         
-         while(rs.next()){
-             taskModel.addElement(new ComboBoxItem(rs.getInt("id"), rs.getString("task")));
-             
-         }
-         this.cmbTask.setModel(taskModel);
-         
+                     
+            ResultSet rs = psGetProjects.executeQuery();
+            
+            while(rs.next()){
+                Project p = new Project(rs.getInt("id"), rs.getString("name"), rs.getInt("totalcost"), rs.getString("notes"), rs.getString("assignedResearcher"));
+                projects.add(p);
+            }
+            
          rs = psGetAssignedResearcher.executeQuery();
          
          this.cmbAssignedResearcher.removeAllItems();
@@ -55,6 +58,8 @@ public class NewProject extends javax.swing.JFrame {
              
          }
          this.cmbAssignedResearcher.setModel(assignedResearcherModel);
+         
+         conn.close();
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Cannot get projects\n\nError" + e);
@@ -75,11 +80,9 @@ public class NewProject extends javax.swing.JFrame {
         btnBackPage = new javax.swing.JButton();
         lblName = new javax.swing.JLabel();
         lblTotalCost = new javax.swing.JLabel();
-        lblTask = new javax.swing.JLabel();
         lblAssignedResearcher = new javax.swing.JLabel();
         lblNotes = new javax.swing.JLabel();
         cmbAssignedResearcher = new javax.swing.JComboBox<>();
-        cmbTask = new javax.swing.JComboBox<>();
         btnViewProjects = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtName = new javax.swing.JTextArea();
@@ -118,9 +121,6 @@ public class NewProject extends javax.swing.JFrame {
         lblTotalCost.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         lblTotalCost.setText("Total Cost");
 
-        lblTask.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
-        lblTask.setText("Task");
-
         lblAssignedResearcher.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         lblAssignedResearcher.setText("Assigned Researcher");
 
@@ -134,9 +134,6 @@ public class NewProject extends javax.swing.JFrame {
                 cmbAssignedResearcherActionPerformed(evt);
             }
         });
-
-        cmbTask.setBackground(new java.awt.Color(235, 197, 246));
-        cmbTask.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnViewProjects.setBackground(new java.awt.Color(235, 197, 246));
         btnViewProjects.setText("View Projects");
@@ -176,25 +173,26 @@ public class NewProject extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBackPage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTotalCost)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(86, 86, 86)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTask)
-                                    .addComponent(lblAssignedResearcher)
-                                    .addComponent(cmbAssignedResearcher, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbTask, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblName)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(77, 77, 77)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblNotes)))
-                            .addComponent(btnBackPage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblTotalCost)
+                                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(77, 77, 77)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblAssignedResearcher)
+                                            .addComponent(cmbAssignedResearcher, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblName)
+                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(77, 77, 77)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblNotes))))
+                                .addGap(9, 9, 9))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(199, 199, 199)
                         .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -217,19 +215,17 @@ public class NewProject extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTotalCost)
-                    .addComponent(lblTask))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbTask, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
+                        .addComponent(lblTotalCost)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
                         .addComponent(lblAssignedResearcher)
-                        .addGap(32, 32, 32)
-                        .addComponent(cmbAssignedResearcher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(cmbAssignedResearcher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCreate)
                 .addGap(33, 33, 33))
@@ -241,7 +237,7 @@ public class NewProject extends javax.swing.JFrame {
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
   try{
       ComboBoxItem assignedResearcher = (ComboBoxItem)assignedResearcherModel.getSelectedItem();
-      ComboBoxItem task = (ComboBoxItem)taskModel.getSelectedItem();
+      
       
       Connection conn = DBConnection.Connect();
       
@@ -252,11 +248,12 @@ public class NewProject extends javax.swing.JFrame {
       pStatement.setString(2, this.txtTotalCost.getText());
       pStatement.setString(3, this.txtNote.getText());
       pStatement.setString(4, String.valueOf(assignedResearcher.getId()));
-      pStatement.setString(5, String.valueOf(task.getId()));
      
       
       pStatement.executeUpdate();
       JOptionPane.showMessageDialog(null, "Create Successful!\n\nReturning to View Projects screen.");
+      
+      conn.close();
   }
   catch(Exception e){
       JOptionPane.showMessageDialog(null, "Cannot save project\n\nError" + e);
@@ -322,7 +319,6 @@ public class NewProject extends javax.swing.JFrame {
     private javax.swing.JButton btnCreate;
     private javax.swing.JButton btnViewProjects;
     private javax.swing.JComboBox<String> cmbAssignedResearcher;
-    private javax.swing.JComboBox<String> cmbTask;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -330,7 +326,6 @@ public class NewProject extends javax.swing.JFrame {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblNewProject;
     private javax.swing.JLabel lblNotes;
-    private javax.swing.JLabel lblTask;
     private javax.swing.JLabel lblTotalCost;
     private javax.swing.JTextArea txtName;
     private javax.swing.JTextArea txtNote;
