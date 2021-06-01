@@ -10,11 +10,16 @@ package systemsdevresearchassignment;
  * @author katie.pijohn
  */
 public class StandardMenu extends javax.swing.JFrame {
-
+    String userName;
     /**
      * Creates new form StandardMenu
      */
     public StandardMenu() {
+        initComponents();
+    }
+
+    public StandardMenu(String inUserName) {
+        this.userName = inUserName;
         initComponents();
     }
 

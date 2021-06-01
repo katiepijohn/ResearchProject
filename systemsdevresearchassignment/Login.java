@@ -156,13 +156,13 @@ public class Login extends javax.swing.JFrame {
                 }
                 if(count == 1){
                     if(Role.equals("Office Admin")){
-                        AdminMenu am = new AdminMenu();
+                        AdminMenu am = new AdminMenu(enteredUsername);
                         am.setVisible(true);
                         this.dispose();
                         
                     }  
                     if(Role.equals("Standard Researcher")){
-                        StandardMenu sm = new StandardMenu();
+                        StandardMenu sm = new StandardMenu(enteredUsername);
                         sm.setVisible(true);
                         this.dispose();
                     }
@@ -172,7 +172,7 @@ public class Login extends javax.swing.JFrame {
                         this.dispose();
                     }
                      if(Role.equals("System Administrator")){
-                        SystemAdministrator sa = new SystemAdministrator();
+                        SystemAdministrator sa = new SystemAdministrator(enteredUsername);
                         sa.setVisible(true);
                         this.dispose();
                     }

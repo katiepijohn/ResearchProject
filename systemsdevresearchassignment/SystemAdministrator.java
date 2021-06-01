@@ -10,13 +10,19 @@ package systemsdevresearchassignment;
  * @author katie.pijohn
  */
 public class SystemAdministrator extends javax.swing.JFrame {
-
+    String userName;
     /**
      * Creates new form SystemAdministrator
      */
     public SystemAdministrator() {
         initComponents();
     }
+
+    public SystemAdministrator(String inUserName) {
+        this.userName = inUserName;
+        initComponents();
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

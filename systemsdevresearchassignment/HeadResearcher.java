@@ -22,12 +22,17 @@ public class HeadResearcher extends javax.swing.JFrame {
     int loggedInUser = 0;
     ArrayList<Project> projects = new ArrayList<Project>();
     ArrayList<Task> tasks = new ArrayList<Task>();
-            
+    String userName;
     /**
      * Creates new form HeadResearcher
      */
     public HeadResearcher() {
-        
+        initComponents();
+        refreshData();
+    }
+
+    public HeadResearcher(String inUserName) {
+        this.userName = inUserName;
         initComponents();
         refreshData();
     }
