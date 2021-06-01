@@ -10,7 +10,7 @@ package systemsdevresearchassignment;
  * @author katie.pijohn
  */
 public class AdminMenu extends javax.swing.JFrame {
-    String userName;
+    Staff staff;
     /**
      * Creates new form AdminMenu
      */
@@ -18,8 +18,8 @@ public class AdminMenu extends javax.swing.JFrame {
         initComponents();
     }
 
-    public AdminMenu(String inUserName){
-        this.userName = inUserName;
+    public AdminMenu(Staff inStaff){
+        this.staff = inStaff;
         initComponents();
     }
 

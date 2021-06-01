@@ -22,7 +22,7 @@ public class HeadResearcher extends javax.swing.JFrame {
     int loggedInUser = 0;
     ArrayList<Project> projects = new ArrayList<Project>();
     ArrayList<Task> tasks = new ArrayList<Task>();
-    String userName;
+    Staff staff;
     /**
      * Creates new form HeadResearcher
      */
@@ -31,8 +31,8 @@ public class HeadResearcher extends javax.swing.JFrame {
         refreshData();
     }
 
-    public HeadResearcher(String inUserName) {
-        this.userName = inUserName;
+    public HeadResearcher(Staff inStaff) {
+        this.staff = inStaff;
         initComponents();
         refreshData();
     }
@@ -45,7 +45,7 @@ public class HeadResearcher extends javax.swing.JFrame {
         Connection conn = DBConnection.Connect();
         
         PreparedStatement psGetProjectsById = conn.prepareStatement(sqlGetProjectsById);
-        psGetProjectsById.setString(1, String.valueOf(loggedInUser.getId()));
+        psGetProjectsById.setString(1, String.valueOf(staff.getId()));
         
         ResultSet rs = psGetProjectsById.executeQuery();
         

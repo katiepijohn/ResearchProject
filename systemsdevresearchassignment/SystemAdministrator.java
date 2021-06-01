@@ -10,7 +10,7 @@ package systemsdevresearchassignment;
  * @author katie.pijohn
  */
 public class SystemAdministrator extends javax.swing.JFrame {
-    String userName;
+    Staff staff;
     /**
      * Creates new form SystemAdministrator
      */
@@ -18,8 +18,8 @@ public class SystemAdministrator extends javax.swing.JFrame {
         initComponents();
     }
 
-    public SystemAdministrator(String inUserName) {
-        this.userName = inUserName;
+    public SystemAdministrator(Staff inStaff) {
+        this.staff = inStaff;
         initComponents();
     }
 
