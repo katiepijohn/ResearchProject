@@ -20,8 +20,12 @@ public class HeadResearcher extends javax.swing.JFrame {
     int currentProjects = 0;
     int currentTasks = 0;
     int loggedInUser = 0;
+    int quoteOfTheDay= 0;
+    ArrayList<Quotes> quotes = new ArrayList<Quotes>();
     ArrayList<Project> projects = new ArrayList<Project>();
     ArrayList<Task> tasks = new ArrayList<Task>();
+    Staff staff;
+    
             
     /**
      * Creates new form HeadResearcher
@@ -31,6 +35,12 @@ public class HeadResearcher extends javax.swing.JFrame {
         initComponents();
         refreshData();
     }
+    public HeadResearcher(Staff inStaff){
+        this.staff = inStaff;
+        initComponents();
+        refreshData();
+    }
+   
     public void refreshData(){
         try{
                 
@@ -40,7 +50,7 @@ public class HeadResearcher extends javax.swing.JFrame {
         Connection conn = DBConnection.Connect();
         
         PreparedStatement psGetProjectsById = conn.prepareStatement(sqlGetProjectsById);
-        psGetProjectsById.setString(1, String.valueOf(loggedInUser.getId()));
+        psGetProjectsById.setString(1, String.valueOf(staff.getId()));
         
         ResultSet rs = psGetProjectsById.executeQuery();
         
@@ -52,6 +62,9 @@ public class HeadResearcher extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Cannot get projects assigned!\n\nError" + e);
         }
     }
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,14 +77,14 @@ public class HeadResearcher extends javax.swing.JFrame {
         lblHead = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
         btnManageProject = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lblWelcomeBack = new javax.swing.JLabel();
+        lblQuoteOfTheDay = new javax.swing.JLabel();
+        txtQuote = new javax.swing.JTextField();
+        lblProjectsAssigned = new javax.swing.JLabel();
+        btnCompleteProjects = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtProjectsAssigned = new javax.swing.JTextArea();
-        jLabel4 = new javax.swing.JLabel();
+        lblTasksAllocated = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtTasksAssigned = new javax.swing.JTextArea();
 
@@ -100,24 +113,29 @@ public class HeadResearcher extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
-        jLabel1.setText("Welcome Back!");
+        lblWelcomeBack.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
+        lblWelcomeBack.setText("Welcome Back!");
 
-        jLabel2.setText("Quote of the day...");
+        lblQuoteOfTheDay.setText("Quote of the day...");
 
-        jTextField1.setBackground(new java.awt.Color(235, 152, 235));
+        txtQuote.setBackground(new java.awt.Color(235, 152, 235));
+        txtQuote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQuoteActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Projects Assigned:");
+        lblProjectsAssigned.setText("Projects Assigned:");
 
-        jButton1.setBackground(new java.awt.Color(235, 197, 246));
-        jButton1.setText("View Complete Projects");
+        btnCompleteProjects.setBackground(new java.awt.Color(235, 197, 246));
+        btnCompleteProjects.setText("View Complete Projects");
 
         txtProjectsAssigned.setBackground(new java.awt.Color(235, 152, 235));
         txtProjectsAssigned.setColumns(20);
         txtProjectsAssigned.setRows(5);
         jScrollPane1.setViewportView(txtProjectsAssigned);
 
-        jLabel4.setText("Tasks Allocated:");
+        lblTasksAllocated.setText("Tasks Allocated:");
 
         txtTasksAssigned.setBackground(new java.awt.Color(235, 152, 235));
         txtTasksAssigned.setColumns(20);
@@ -140,28 +158,29 @@ public class HeadResearcher extends javax.swing.JFrame {
                                 .addComponent(lblHead))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(151, 151, 151)
-                                .addComponent(jLabel1))
+                                .addComponent(lblWelcomeBack))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(113, 113, 113)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(44, 44, 44)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(btnManageProject)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jButton1))))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGap(38, 38, 38)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3))
+                                        .addComponent(lblProjectsAssigned))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(lblTasksAllocated)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(113, 113, 113)
+                                    .addComponent(btnManageProject)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnCompleteProjects)
+                                    .addGap(72, 72, 72))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(lblQuoteOfTheDay)
+                                    .addGap(15, 15, 15)
+                                    .addComponent(txtQuote, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(4, 4, 4))))
                         .addGap(0, 23, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -171,25 +190,25 @@ public class HeadResearcher extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnExit)
                 .addGap(35, 35, 35)
-                .addComponent(jLabel1)
+                .addComponent(lblWelcomeBack)
                 .addGap(18, 18, 18)
                 .addComponent(lblHead)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(txtQuote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblQuoteOfTheDay))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProjectsAssigned)
+                    .addComponent(lblTasksAllocated))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnManageProject)
-                    .addComponent(jButton1))
+                    .addComponent(btnCompleteProjects))
                 .addGap(50, 50, 50))
         );
 
@@ -207,6 +226,32 @@ public class HeadResearcher extends javax.swing.JFrame {
         am.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtQuoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuoteActionPerformed
+            try{
+            
+                
+            String sqlGetQuotes = "SELECT * FROM tblQuotes";
+            
+            
+            Connection conn = DBConnection.Connect();
+            
+            PreparedStatement psGetQuotes = conn.prepareStatement(sqlGetQuotes);
+            
+            ResultSet rs = psGetQuotes.executeQuery();
+            
+            while(rs.next()){
+                Quotes q = new Quotes(rs.getInt("id"), rs.getString("quoteOfTheDay"));
+                quotes.add(q);
+            
+            }
+            this.txtQuote.setText(quotes.get(quoteOfTheDay).getQuoteOfTheDay());
+            }
+            
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Cannot get quote\n\nError"+ e);
+            }
+    }//GEN-LAST:event_txtQuoteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,18 +289,18 @@ public class HeadResearcher extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCompleteProjects;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnManageProject;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblHead;
+    private javax.swing.JLabel lblProjectsAssigned;
+    private javax.swing.JLabel lblQuoteOfTheDay;
+    private javax.swing.JLabel lblTasksAllocated;
+    private javax.swing.JLabel lblWelcomeBack;
     private javax.swing.JTextArea txtProjectsAssigned;
+    private javax.swing.JTextField txtQuote;
     private javax.swing.JTextArea txtTasksAssigned;
     // End of variables declaration//GEN-END:variables
 }

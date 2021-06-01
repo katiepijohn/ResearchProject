@@ -10,13 +10,17 @@ package systemsdevresearchassignment;
  * @author katie.pijohn
  */
 public class AdminMenu extends javax.swing.JFrame {
-
+Staff staff;
     /**
      * Creates new form AdminMenu
      */
     public AdminMenu() {
         initComponents();
     }
+      public AdminMenu(Staff inStaff){
+        this.staff = inStaff;
+        initComponents();
+      }
 
     /**
      * This method is called from within the constructor to initialize the form.

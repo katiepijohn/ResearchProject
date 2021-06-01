@@ -10,11 +10,15 @@ package systemsdevresearchassignment;
  * @author katie.pijohn
  */
 public class SystemAdministrator extends javax.swing.JFrame {
-
+Staff staff;
     /**
      * Creates new form SystemAdministrator
      */
     public SystemAdministrator() {
+        initComponents();
+    }
+        public SystemAdministrator(Staff inStaff) {
+        this.staff = inStaff;
         initComponents();
     }
 

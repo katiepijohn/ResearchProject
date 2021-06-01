@@ -10,13 +10,21 @@ package systemsdevresearchassignment;
  * @author katie.pijohn
  */
 public class StandardMenu extends javax.swing.JFrame {
-
+Staff staff;
     /**
      * Creates new form StandardMenu
      */
     public StandardMenu() {
         initComponents();
+        refreshData();
     }
+       public StandardMenu(Staff inStaff) {
+        this.staff = inStaff;
+        initComponents();
+    }
+       public void refreshData(){
+           
+       }
 
     /**
      * This method is called from within the constructor to initialize the form.

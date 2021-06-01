@@ -135,6 +135,7 @@ public class Login extends javax.swing.JFrame {
                 String enteredUsername = txtUsername.getText().toLowerCase();
                 String enteredPassword = txtPassword.getText();
                 
+                Staff staff = null;
                 int id = 0;
                 String Role = "";
                 
@@ -149,30 +150,29 @@ public class Login extends javax.swing.JFrame {
                 int count = 0;
                 
                 while(rs.next()){
-                    id = rs.getInt("id");
-                    Role =rs.getString("Role");
-                    
+                    staff = new Staff(rs.getInt("id"), rs.getString("Username"),
+                            rs.getString("Password"), rs.getString("Role"));
                     count++;
                 }
                 if(count == 1){
                     if(Role.equals("Office Admin")){
-                        AdminMenu am = new AdminMenu();
+                        AdminMenu am = new AdminMenu(staff);
                         am.setVisible(true);
                         this.dispose();
                         
                     }  
                     if(Role.equals("Standard Researcher")){
-                        StandardMenu sm = new StandardMenu();
+                        StandardMenu sm = new StandardMenu(staff);
                         sm.setVisible(true);
                         this.dispose();
                     }
                     if(Role.equals("Head Researcher")){
-                        HeadResearcher hr = new HeadResearcher(enteredUsername);
+                        HeadResearcher hr = new HeadResearcher(staff);
                         hr.setVisible(true);
                         this.dispose();
                     }
                      if(Role.equals("System Administrator")){
-                        SystemAdministrator sa = new SystemAdministrator();
+                        SystemAdministrator sa = new SystemAdministrator(staff);
                         sa.setVisible(true);
                         this.dispose();
                     }
