@@ -33,6 +33,9 @@ public class TrailAudit extends javax.swing.JFrame {
         lblAssignedResearcher = new javax.swing.JLabel();
         lblProjectsCompleted = new javax.swing.JLabel();
         lblTasksCompleted = new javax.swing.JLabel();
+        txtPojectsComplete = new javax.swing.JTextField();
+        txtTasksComplete = new javax.swing.JTextField();
+        cmbxAssignedResearcher = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(142, 90, 196));
@@ -58,6 +61,13 @@ public class TrailAudit extends javax.swing.JFrame {
 
         lblTasksCompleted.setText("Tasks Completed:");
 
+        txtPojectsComplete.setBackground(new java.awt.Color(235, 152, 235));
+
+        txtTasksComplete.setBackground(new java.awt.Color(235, 152, 235));
+
+        cmbxAssignedResearcher.setBackground(new java.awt.Color(235, 197, 246));
+        cmbxAssignedResearcher.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,19 +78,24 @@ public class TrailAudit extends javax.swing.JFrame {
                         .addContainerGap(417, Short.MAX_VALUE)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(172, 172, 172)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblHistory)
-                                    .addComponent(lblAudit)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(97, 97, 97)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblProjectsCompleted)
-                                    .addComponent(lblAssignedResearcher)
-                                    .addComponent(lblTasksCompleted))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(lblAssignedResearcher)
+                            .addComponent(lblProjectsCompleted)
+                            .addComponent(lblTasksCompleted))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtPojectsComplete, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtTasksComplete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+                            .addComponent(cmbxAssignedResearcher, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblHistory)
+                            .addComponent(lblAudit))
+                        .addGap(82, 82, 82)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -92,13 +107,19 @@ public class TrailAudit extends javax.swing.JFrame {
                 .addComponent(lblAudit)
                 .addGap(18, 18, 18)
                 .addComponent(lblHistory)
-                .addGap(61, 61, 61)
-                .addComponent(lblAssignedResearcher)
-                .addGap(54, 54, 54)
-                .addComponent(lblProjectsCompleted)
-                .addGap(64, 64, 64)
-                .addComponent(lblTasksCompleted)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAssignedResearcher)
+                    .addComponent(cmbxAssignedResearcher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProjectsCompleted)
+                    .addComponent(txtPojectsComplete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTasksCompleted)
+                    .addComponent(txtTasksComplete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,10 +168,13 @@ public class TrailAudit extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
+    private javax.swing.JComboBox<String> cmbxAssignedResearcher;
     private javax.swing.JLabel lblAssignedResearcher;
     private javax.swing.JLabel lblAudit;
     private javax.swing.JLabel lblHistory;
     private javax.swing.JLabel lblProjectsCompleted;
     private javax.swing.JLabel lblTasksCompleted;
+    private javax.swing.JTextField txtPojectsComplete;
+    private javax.swing.JTextField txtTasksComplete;
     // End of variables declaration//GEN-END:variables
 }
