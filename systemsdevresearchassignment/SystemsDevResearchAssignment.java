@@ -20,6 +20,7 @@ public class SystemsDevResearchAssignment {
     public static void main(String[] args) {
         // TODO code application logic here
         try{
+            new Login().setVisible(true);
             Connection conn = DBConnection.Connect();
             String sql = "SELECT * from tblUser";
             

@@ -136,8 +136,6 @@ public class Login extends javax.swing.JFrame {
                 String enteredPassword = txtPassword.getText();
 
                 Staff staff = null;
-                int id = 0;
-                String Role = "";
                 
                 Connection conn = DBConnection.Connect();
                         
@@ -155,23 +153,23 @@ public class Login extends javax.swing.JFrame {
                     count++;
                 }
                 if(count == 1){
-                    if(Role.equals("Office Admin")){
+                    if(staff.getRole().equals("Office Admin")){
                         AdminMenu am = new AdminMenu(staff);
                         am.setVisible(true);
                         this.dispose();
                         
                     }  
-                    if(Role.equals("Standard Researcher")){
+                    if(staff.getRole().equals("Standard Researcher")){
                         StandardMenu sm = new StandardMenu(staff);
                         sm.setVisible(true);
                         this.dispose();
                     }
-                    if(Role.equals("Head Researcher")){
+                    if(staff.getRole().equals("Head Researcher")){
                         HeadResearcher hr = new HeadResearcher(staff);
                         hr.setVisible(true);
                         this.dispose();
                     }
-                     if(Role.equals("System Administrator")){
+                     if(staff.getRole().equals("System Administrator")){
                         SystemAdministrator sa = new SystemAdministrator(staff);
                         sa.setVisible(true);
                         this.dispose();

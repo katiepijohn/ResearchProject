@@ -13,7 +13,7 @@ public class DBConnection {
     public static Connection Connect(){
         try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\katie.pijohn\\source\\repos\\SQLiteDB\\test.db");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/taruntangar/Downloads/test.db");
             return conn;
     }
         catch (Exception e){
