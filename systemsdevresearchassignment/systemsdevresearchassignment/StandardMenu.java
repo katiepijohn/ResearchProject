@@ -5,12 +5,24 @@
  */
 package systemsdevresearchassignment;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author katie.pijohn
  */
 public class StandardMenu extends javax.swing.JFrame {
-Staff staff;
+    int currentProjects = 0;
+    int currentTasks = 0;
+    int quoteOfTheDay= 0;
+    ArrayList<Quotes> quotes = new ArrayList<Quotes>();
+    ArrayList<Project> projects = new ArrayList<Project>();
+    ArrayList<Task> tasks = new ArrayList<Task>();
+    Staff staff;
     /**
      * Creates new form StandardMenu
      */
@@ -23,7 +35,29 @@ Staff staff;
         initComponents();
     }
        public void refreshData(){
+           try{
+           String sqlGetQuotes = "SELECT * FROM tblQuotes WHERE quoteOfTheDay=?";
            
+           Connection conn = DBConnection.Connect();
+           
+           PreparedStatement psGetQuotes = conn.prepareStatement(sqlGetQuotes);
+           
+           ResultSet rs = psGetQuotes.executeQuery();
+           
+            while(rs.next()){
+                Quotes q = new Quotes(rs.getInt("id"), rs.getString("quoteOfTheDay"));
+                quotes.add(q);
+                
+               this.txtQuote.setText(quotes.get(quoteOfTheDay).getQuoteOfTheDay());
+               
+               conn.close();
+    
+            }
+        
+       }
+           catch(Exception e){
+               JOptionPane.showMessageDialog(null, "Cannot get Standard Researcher detials\n\nError"+ e);
+           }
        }
 
     /**
@@ -40,7 +74,7 @@ Staff staff;
         btnViewProject = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtQuote = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -78,7 +112,7 @@ Staff staff;
 
         jLabel2.setText("Quote of the day...");
 
-        jTextField1.setBackground(new java.awt.Color(235, 152, 235));
+        txtQuote.setBackground(new java.awt.Color(235, 152, 235));
 
         jLabel3.setText("Projects Assigned:");
 
@@ -129,7 +163,7 @@ Staff staff;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtQuote, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +183,7 @@ Staff staff;
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQuote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -224,7 +258,7 @@ Staff staff;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblStandard;
+    private javax.swing.JTextField txtQuote;
     // End of variables declaration//GEN-END:variables
 }

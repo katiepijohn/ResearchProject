@@ -19,12 +19,12 @@ import java.util.ArrayList;
 public class HeadResearcher extends javax.swing.JFrame {
     int currentProjects = 0;
     int currentTasks = 0;
-    int loggedInUser = 0;
     int quoteOfTheDay= 0;
     ArrayList<Quotes> quotes = new ArrayList<Quotes>();
     ArrayList<Project> projects = new ArrayList<Project>();
     ArrayList<Task> tasks = new ArrayList<Task>();
     Staff staff;
+    DefaultComboBoxModel assignedResearcherModel = new DefaultComboBoxModel();
     
             
     /**
@@ -44,10 +44,9 @@ public class HeadResearcher extends javax.swing.JFrame {
     public void refreshData(){
         try{
                 
-        
-        String sqlGetProjectsById = "SELECT * FROM tblProjects WHERE id =?";
-        String sqlGetTasksById = "SELECT * FROM tblProjectTasks WHERE id=?";
-        String sqlGetQuotes = "SELECT * FROM tblQuotes WHERE quoteOfTheDay=?";
+        String sqlGetProjectsById = "SELECT * FROM tblProjects WHERE assignedResearcher =?";
+        String sqlGetTasksById = "SELECT * FROM tblProjectTasks WHERE assignedResearcher =?";
+        String sqlGetQuotes = "SELECT * FROM tblQuotes WHERE id=?";
             
         
         Connection conn = DBConnection.Connect();
@@ -61,12 +60,36 @@ public class HeadResearcher extends javax.swing.JFrame {
        
    
         ResultSet rs = psGetProjectsById.executeQuery();
-        rs = psGetTasksById.executeQuery();
-        rs = psGetQuotes.executeQuery();
         
+        
+        while(rs.next()){
+                Project p = new Project(rs.getInt("id"), rs.getString("name"), rs.getInt("totalcost"), rs.getString("notes"), rs.getString("assignedResearcher"));
+                projects.add(p);
+            }
+            
+            rs = psGetTasksById.executeQuery();
+            
+            while(rs.next()){
+                Task t = new Task(rs.getInt("id"), rs.getString("task"), rs.getInt("taskcost"), rs.getInt("projectID"), rs.getInt("assignedResearcher"));
+                tasks.add(t);
+                
+                
+    
+            }
+            rs = psGetQuotes.executeQuery();
+                        
+            while(rs.next()){
+                Quotes q = new Quotes(rs.getInt("id"), rs.getString("quoteOfTheDay"));
+                quotes.add(q);
+                
+                
+    
+            }
             this.txtQuote.setText(quotes.get(quoteOfTheDay).getQuoteOfTheDay());
             this.txtProjectsAssigned.setText(projects.get(currentProjects).getAssignedResearcher());
             this.txtTasksAssigned.setText(String.valueOf(tasks.get(currentTasks).getAssignedResearcher()));
+            
+            conn.close();
 
     }
         catch(Exception e){
@@ -104,7 +127,6 @@ public class HeadResearcher extends javax.swing.JFrame {
         setBackground(new java.awt.Color(142, 90, 196));
         setMaximumSize(new java.awt.Dimension(500, 500));
         setMinimumSize(new java.awt.Dimension(500, 500));
-        setPreferredSize(new java.awt.Dimension(500, 500));
         setResizable(false);
 
         lblHead.setFont(new java.awt.Font("Rockwell", 1, 18)); // NOI18N
@@ -237,7 +259,7 @@ public class HeadResearcher extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnManageProject)
                     .addComponent(btnReviewTasks))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)

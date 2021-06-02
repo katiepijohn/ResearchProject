@@ -64,7 +64,7 @@ public class CompleteTasks extends javax.swing.JFrame {
             
         }
             this.cmbxAssignedResearcher.setModel(assignedResearcherModel);
-            this.lblProjectID.setText(String.valueOf(tasks.get(currentTasks).getId()));
+            this.lblId.setText(String.valueOf(tasks.get(currentTasks).getId()));
             this.txtTaskName.setText(tasks.get(currentTasks).getTask());
             this.txtProjectID.setText(String.valueOf(tasks.get(currentTasks).getProjectID()));
             this.txtTaskCost.setText(String.valueOf(tasks.get(currentTasks).getTaskcost()));
@@ -143,14 +143,39 @@ public class CompleteTasks extends javax.swing.JFrame {
 
         btnSignOff.setBackground(new java.awt.Color(235, 197, 246));
         btnSignOff.setText("Sign Off");
+        btnSignOff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignOffActionPerformed(evt);
+            }
+        });
 
         btnPrevious.setText("<");
+        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousActionPerformed(evt);
+            }
+        });
 
         btnNext.setText(">");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         btnLast.setText(">|");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
 
         btnFirst.setText("|<");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,7 +184,7 @@ public class CompleteTasks extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblId)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -193,17 +218,17 @@ public class CompleteTasks extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addComponent(btnSignOff, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
+                        .addGap(127, 127, 127)
                         .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnPrevious)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(26, 26, 26)
                         .addComponent(btnNext)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(btnSignOff, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -233,9 +258,9 @@ public class CompleteTasks extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAssignedResearcher)
                     .addComponent(cmbxAssignedResearcher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(btnSignOff)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPrevious)
                     .addComponent(btnNext)
@@ -252,6 +277,76 @@ public class CompleteTasks extends javax.swing.JFrame {
         hr.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
+        if(currentTasks !=0){
+            currentTasks--;
+            
+            this.lblId.setText(String.valueOf(tasks.get(currentTasks).getId()));
+            this.txtProjectID.setText(String.valueOf(tasks.get(currentTasks).getProjectID()));
+            this.txtTaskName.setText(tasks.get(currentTasks).getTask());
+            this.txtTaskCost.setText(String.valueOf(tasks.get(currentTasks).getTaskcost()));
+            }
+    }//GEN-LAST:event_btnPreviousActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+            if(currentTasks !=tasks.size()-1){
+            currentTasks++;
+            
+            this.lblId.setText(String.valueOf(tasks.get(currentTasks).getId()));
+            this.txtProjectID.setText(String.valueOf(tasks.get(currentTasks).getProjectID()));
+            this.txtTaskName.setText(tasks.get(currentTasks).getTask());
+            this.txtTaskCost.setText(String.valueOf(tasks.get(currentTasks).getTaskcost()));
+            }
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+            if(currentTasks !=tasks.size()-1){
+            currentTasks = tasks.size()-1;
+
+            this.lblId.setText(String.valueOf(tasks.get(currentTasks).getId()));
+            this.txtProjectID.setText(String.valueOf(tasks.get(currentTasks).getProjectID()));
+            this.txtTaskName.setText(tasks.get(currentTasks).getTask());
+            this.txtTaskCost.setText(String.valueOf(tasks.get(currentTasks).getTaskcost()));
+                   
+        }
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+            if(currentTasks !=0){
+            currentTasks=0;
+            
+            this.lblId.setText(String.valueOf(tasks.get(currentTasks).getId()));
+            this.txtProjectID.setText(String.valueOf(tasks.get(currentTasks).getProjectID()));
+            this.txtTaskName.setText(tasks.get(currentTasks).getTask());
+            this.txtTaskCost.setText(String.valueOf(tasks.get(currentTasks).getTaskcost()));
+           }
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnSignOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOffActionPerformed
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to sign off this task?\n\nThis cannot be undone and will be deleted.", "Warning!", JOptionPane.YES_NO_OPTION);
+        if(reply == JOptionPane.YES_OPTION){
+            try{
+                Connection conn = DBConnection.Connect();
+                
+                String sqlDelete = "DELETE FROM tblCompleteTasks WHERE id=?";
+                PreparedStatement pStatement = conn.prepareStatement(sqlDelete);
+                pStatement.setString(1, String.valueOf(tasks.get(currentTasks).getId()));
+                
+                pStatement.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Task has been signed off successfully!");
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Cannot sign off task\n\nError"+ e);
+            }
+                    currentTasks =0;
+                    this.refreshData();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Task has not been signed off!");
+            
+        }
+    }//GEN-LAST:event_btnSignOffActionPerformed
 
     /**
      * @param args the command line arguments

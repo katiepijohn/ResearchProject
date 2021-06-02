@@ -187,40 +187,42 @@ public class ClosedProjects extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNotes)
-                            .addComponent(lblAssignedResearcher)
-                            .addComponent(lblTotalCost)
-                            .addComponent(lblProjectName))
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cmbxAssignedResearcher, javax.swing.GroupLayout.Alignment.LEADING, 0, 139, Short.MAX_VALUE)
-                            .addComponent(txtTotalCost, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtProjectName, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNotes)))
+                        .addContainerGap()
+                        .addComponent(lblProjectID)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(btnFirst)
-                        .addGap(24, 24, 24)
-                        .addComponent(btnPrevious)
-                        .addGap(34, 34, 34)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLast))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
-                        .addComponent(lblCompleteProjects))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(213, 213, 213)
-                        .addComponent(btnCloseProject)))
-                .addContainerGap(101, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblProjectID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblNotes)
+                                    .addComponent(lblAssignedResearcher)
+                                    .addComponent(lblTotalCost)
+                                    .addComponent(lblProjectName))
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cmbxAssignedResearcher, javax.swing.GroupLayout.Alignment.LEADING, 0, 139, Short.MAX_VALUE)
+                                    .addComponent(txtTotalCost, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtProjectName, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNotes)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(179, 179, 179)
+                                .addComponent(lblCompleteProjects))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(150, 150, 150)
+                                .addComponent(btnFirst)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnPrevious)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnLast))
+                                    .addComponent(btnCloseProject))))
+                        .addGap(0, 50, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,15 +249,15 @@ public class ClosedProjects extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNotes)
                     .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(btnCloseProject)
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFirst)
+                    .addComponent(btnNext)
                     .addComponent(btnPrevious)
                     .addComponent(btnLast)
-                    .addComponent(btnNext))
-                .addGap(77, 77, 77))
+                    .addComponent(btnFirst))
+                .addGap(41, 41, 41))
         );
 
         pack();
@@ -266,19 +268,82 @@ public class ClosedProjects extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTotalCostActionPerformed
 
     private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousActionPerformed
-        // TODO add your handling code here:
+            if(currentProjects !=0){
+            currentProjects--;  
+            
+       
+            for(int i = 0; i < assignedResearcherModel.getSize(); i++){
+            ComboBoxItem o = (ComboBoxItem)assignedResearcherModel.getElementAt(i);
+            if(o.getId() == projects.get(currentProjects).getId()){
+            assignedResearcherModel.setSelectedItem(o);
+            }
+            }
+            this.cmbxAssignedResearcher.setModel(assignedResearcherModel);
+            this.lblProjectID.setText(String.valueOf(projects.get(currentProjects).getId()));
+            this.txtProjectName.setText(projects.get(currentProjects).getName());
+            this.txtNotes.setText(projects.get(currentProjects).getNotes());
+            this.txtTotalCost.setText(String.valueOf(projects.get(currentProjects).getTotalCost()));
+            }
     }//GEN-LAST:event_btnPreviousActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
+            if(currentProjects !=projects.size()-1){
+            currentProjects++;
+            //refresh combobox choice
+            //update labels
+            for(int i = 0; i < assignedResearcherModel.getSize(); i++){
+            ComboBoxItem o = (ComboBoxItem)assignedResearcherModel.getElementAt(i);
+            if(o.getId() == projects.get(currentProjects).getId()){
+                assignedResearcherModel.setSelectedItem(o);
+            }
+            
+                    }
+            this.cmbxAssignedResearcher.setModel(assignedResearcherModel);
+            this.lblProjectID.setText(String.valueOf(projects.get(currentProjects).getId()));
+            this.txtProjectName.setText(projects.get(currentProjects).getName());
+            this.txtNotes.setText(projects.get(currentProjects).getNotes());
+            this.txtTotalCost.setText(String.valueOf(projects.get(currentProjects).getTotalCost()));
+            }
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
-        // TODO add your handling code here:
+            if(currentProjects !=0){
+            currentProjects=0;
+            //refresh combobox choice
+            //update labels
+            for(int i = 0; i < assignedResearcherModel.getSize(); i++){
+            ComboBoxItem o = (ComboBoxItem)assignedResearcherModel.getElementAt(i);
+            if(o.getId() == projects.get(currentProjects).getId()){
+                assignedResearcherModel.setSelectedItem(o);
+            }
+            
+                    }
+            this.cmbxAssignedResearcher.setModel(assignedResearcherModel);
+            this.lblProjectID.setText(String.valueOf(projects.get(currentProjects).getId()));
+            this.txtProjectName.setText(projects.get(currentProjects).getName());
+            this.txtNotes.setText(projects.get(currentProjects).getNotes());
+            this.txtTotalCost.setText(String.valueOf(projects.get(currentProjects).getTotalCost()));
+            }
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        // TODO add your handling code here:
+            if(currentProjects !=projects.size()-1){
+            currentProjects = projects.size()-1;
+            //refresh combobox choice
+            //update labels
+            for(int i = 0; i < assignedResearcherModel.getSize(); i++){
+            ComboBoxItem o = (ComboBoxItem)assignedResearcherModel.getElementAt(i);
+            if(o.getId() == projects.get(currentProjects).getId()){
+                assignedResearcherModel.setSelectedItem(o);
+            }
+            
+                    }
+            this.cmbxAssignedResearcher.setModel(assignedResearcherModel);
+            this.lblProjectID.setText(String.valueOf(projects.get(currentProjects).getId()));
+            this.txtProjectName.setText(projects.get(currentProjects).getName());
+            this.txtNotes.setText(projects.get(currentProjects).getNotes());
+            this.txtTotalCost.setText(String.valueOf(projects.get(currentProjects).getTotalCost()));
+            }
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnCloseProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseProjectActionPerformed
@@ -287,7 +352,7 @@ public class ClosedProjects extends javax.swing.JFrame {
             try{
                 Connection conn = DBConnection.Connect();
                 
-                String sqlDelete = "DELETE FROM tblProjects WHERE id=?";
+                String sqlDelete = "DELETE FROM tblClosedProjects WHERE id=?";
                 PreparedStatement pStatement = conn.prepareStatement(sqlDelete);
                 pStatement.setString(1, String.valueOf(projects.get(currentProjects).getId()));
                 

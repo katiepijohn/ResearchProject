@@ -152,6 +152,7 @@ public class Login extends javax.swing.JFrame {
                 while(rs.next()){
                     staff = new Staff(rs.getInt("id"), rs.getString("Username"),
                             rs.getString("Password"), rs.getString("Role"));
+                    
                     count++;
                 }
                 if(count == 1){
@@ -178,6 +179,7 @@ public class Login extends javax.swing.JFrame {
                     }
 
                     }
+                
                 
             
             else if(count>1){
