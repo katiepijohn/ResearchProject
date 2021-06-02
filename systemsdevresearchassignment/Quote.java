@@ -9,11 +9,11 @@ package systemsdevresearchassignment;
  *
  * @author katie.pijohn
  */
-public class quoteOfTheDay {
+public class Quote {
     private int id;
     private String quoteOfTheDay;
     
-  public quoteOfTheDay(int id, String quoteOfTheDay){
+  public Quote(int id, String quoteOfTheDay){
       this.id = id;
       this.quoteOfTheDay = quoteOfTheDay;
   }  

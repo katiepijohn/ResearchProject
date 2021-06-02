@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class HeadResearcher extends javax.swing.JFrame {
     ArrayList<Project> projects = new ArrayList<Project>();
     ArrayList<Task> tasks = new ArrayList<Task>();
+    ArrayList<Quote> quotes = new ArrayList<Quote>();
     Staff staff;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
@@ -29,7 +30,7 @@ public class HeadResearcher extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtQuote;
     private javax.swing.JLabel lblHead;
     private javax.swing.JTextArea txtProjectsAssigned;
     private javax.swing.JTextArea txtTasksAssigned;
@@ -87,6 +88,7 @@ public class HeadResearcher extends javax.swing.JFrame {
 
             String sqlGetProjectsByResearcher = "SELECT * FROM tblProjects WHERE assignedResearcher =?";
             String sqlGetTasksByProject = "SELECT * FROM tblProjectTasks WHERE assignedResearcher =?";
+            String sqlGetQuotes = "SELECT * FROM tblQuotes";
 
             try(Connection conn = DBConnection.Connect()) {
                 try(PreparedStatement psGetProjectsById = conn.prepareStatement(sqlGetProjectsByResearcher)) {
@@ -111,6 +113,15 @@ public class HeadResearcher extends javax.swing.JFrame {
                     }
                 }
 
+                try(Statement psGetQuotes = conn.createStatement()) {
+                    try(ResultSet rsQuotes = psGetQuotes.executeQuery(sqlGetQuotes)) {
+                        while (rsQuotes.next()) {
+                            Quote quote = new Quote(rsQuotes.getInt("id"), rsQuotes.getString("quoteOfTheDay"));
+                            quotes.add(quote);
+                        }
+                    }
+                }
+
                 if (projects.size() > 0) {
                     int projectIndex = 0;
                     for (Project project: projects) {
@@ -129,6 +140,11 @@ public class HeadResearcher extends javax.swing.JFrame {
                         this.txtTasksAssigned.append("\n");
                                 //.insert(task.getTask(), taskIndex);
                     }
+                }
+
+                if(quotes.size() > 0){
+                    int quoteIndex = (int)(Math.random() * ((quotes.size() - 1) + 1)) + 1;
+                    this.txtQuote.setText(quotes.get(quoteIndex).getQuoteOfTheDay());
                 }
             }
         } catch (Exception e) {
@@ -150,7 +166,7 @@ public class HeadResearcher extends javax.swing.JFrame {
         btnManageProject = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtQuote = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -189,7 +205,7 @@ public class HeadResearcher extends javax.swing.JFrame {
 
         jLabel2.setText("Quote of the day...");
 
-        jTextField1.setBackground(new java.awt.Color(235, 152, 235));
+        txtQuote.setBackground(new java.awt.Color(235, 152, 235));
 
         jLabel3.setText("Projects Assigned:");
 
@@ -232,7 +248,7 @@ public class HeadResearcher extends javax.swing.JFrame {
                                                                                 .addGroup(layout.createSequentialGroup()
                                                                                         .addComponent(jLabel2)
                                                                                         .addGap(44, 44, 44)
-                                                                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                        .addComponent(txtQuote, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                                 .addGroup(layout.createSequentialGroup()
                                                                                         .addComponent(btnManageProject)
                                                                                         .addGap(18, 18, 18)
@@ -261,7 +277,7 @@ public class HeadResearcher extends javax.swing.JFrame {
                                 .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel2)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtQuote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(32, 32, 32)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel3)
